@@ -1,17 +1,16 @@
-const inquirer = require('inquirer');
+const { getUserInput } = require('./src/userInteraction');
+const { getBabysittingCharge } = require('./src/calculations');
 
-const questions = [];
+const getSelectedTimes = async () => getUserInput();
 
-const getUserInput = async () => inquirer.prompt().then((r) => r);
-
-const main = async () => {
-  const selectedTimes = await getUserInput();
-  return selectedTimes;
+/**
+ * @returns babysitting charge for the night depending on start time, bed time, end time and
+ * num hours in specific hour sets
+ */
+const main = () => {
+  const selectedTimes = getSelectedTimes();
+  const nightlyCharge = getBabysittingCharge(selectedTimes);
+  return nightlyCharge;
 };
 
 main();
-
-module.exports = {
-  questions,
-  main,
-};

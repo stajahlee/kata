@@ -11,7 +11,7 @@ const getRelevantTimes = () => {
     allPossibleTimes.push(`${j} AM`);
   }
   const startTimes = allPossibleTimes.slice(0, -1);
-  const bedTimes = allPossibleTimes.slice(0, -5);
+  const bedTimes = allPossibleTimes.slice(0, -5).concat(['12 AM or Later']);
   const endTimes = allPossibleTimes.slice(1);
   return { startTimes, bedTimes, endTimes };
 };

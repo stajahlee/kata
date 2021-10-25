@@ -4,7 +4,9 @@
   "description": "Calculate babysitting rate",
   "main": "index.js",
   "scripts": {
-    "test": "mocha './**/*.test.js'"
+    "test": "mocha './**/*.test.js'",
+    "test:watch": "mocha --watch './**/*.test.js'",
+    "get-rate": "node index.js"
   },
   "repository": {
     "type": "git",

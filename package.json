@@ -1,0 +1,30 @@
+{
+  "name": "babysitter-kata",
+  "version": "0.0.1",
+  "description": "Calculate babysitting rate",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha './**/*.test.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stajahlee/kata.git"
+  },
+  "author": "Stajah Hoeflich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stajahlee/kata/issues"
+  },
+  "homepage": "https://github.com/stajahlee/kata#readme",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "mocha": "^9.1.3",
+    "prettier": "^2.4.1"
+  },
+  "dependencies": {}
+}

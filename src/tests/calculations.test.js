@@ -121,13 +121,15 @@ describe('calculations', () => {
         assert.equal(getBabysittingCharge(times), 84);
       });
 
-      it('should return 88 dollars when start time is 9 PM bed time is 6 PM and end time is 12 AM', () => {
+      it('should return 24 dollars when start time is 9 PM bed time is 6 PM and end time is 12 AM', () => {
+        // fun edge case where baby or child is already asleep on arrival
         const times = { startTime: '9 PM', bedTime: '6 PM', endTime: '12 AM' };
-        // ((12 - 9) * 8) + (4 * 16) = 88
-        assert.equal(getBabysittingCharge(times), 88);
+        // ((12 - 9) * 8) = 24
+        assert.equal(getBabysittingCharge(times), 24);
       });
 
-      it('should return 0 dollars when start time is 5 PM bed time is 7 PM and end time is 4 AM', () => {
+      it('should return 0 dollars when start time is 9 PM bed time is 9 PM and end time is 9 PM', () => {
+        // another fun edge case where times input are all the same
         const times = {
           startTime: '9 PM',
           bedTime: '9 PM',

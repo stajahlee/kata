@@ -137,6 +137,12 @@ describe('calculations', () => {
     });
 
     describe('various start, bed, and end times', () => {
+      it('should return 8 dollars when start time is 5 PM bed time is 5 PM and end time is 6 PM', () => {
+        const times = { startTime: '5 PM', bedTime: '5 PM', endTime: '6 PM' };
+        // (6 - 5) * 8
+        assert.equal(getBabysittingCharge(times), 8);
+      });
+
       it('should return 84 dollars when start time is 7 PM bed time is 10 PM and end time is 2 AM', () => {
         const times = { startTime: '7 PM', bedTime: '10 PM', endTime: '2 AM' };
         // ((10 - 7) * 12) + ((12 - 10) * 8) + (2 * 16) = 84

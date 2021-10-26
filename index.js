@@ -1,4 +1,4 @@
-const { getUserInput } = require('./src/userInteraction');
+const { header, instructions, getUserInput } = require('./src/userInteraction');
 const { getBabysittingCharge } = require('./src/calculations');
 
 const getSelectedTimes = async () => getUserInput();
@@ -8,9 +8,15 @@ const getSelectedTimes = async () => getUserInput();
  * num hours in specific hour sets
  */
 const main = async () => {
+  process.stdout.write(header);
+  process.stdout.write(instructions);
+
   const selectedTimes = await getSelectedTimes();
   const nightlyCharge = getBabysittingCharge(selectedTimes);
-  return nightlyCharge;
+
+  process.stdout.write(
+    `\nThis night's babysitting charge should be:\n\n$${nightlyCharge}.00\n\n`
+  );
 };
 
 main();

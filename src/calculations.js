@@ -45,6 +45,43 @@ const getBabysittingCharge = (
   const timeFromBedToMidnight = 12 - bedTime;
   const timeFromMidnightToEnd = endTime >= 1 && endTime <= 4 ? endTime : 0;
 
+  // start, bed, and end all before midnight, with bed in between
+  if (
+    startTime === earlier(startTime, 12) &&
+    endTime === earlier(endTime, 12) &&
+    bedTime === earlier(bedTime, 12) &&
+    bedTime < endTime
+  ) {
+    return (
+      (bedTime - startTime) * startToBedRate +
+      (endTime - bedTime) * bedToMidnightRate
+    );
+  }
+
+  // start and end before midnight, with bed after ending
+  if (
+    startTime === earlier(startTime, 12) &&
+    endTime === earlier(endTime, 12) &&
+    endTime === earlier(bedTime, endTime)
+  ) {
+    return (endTime - startTime) * startToBedRate;
+  }
+
+  // start and end both after midnight, bedtime is not relevant in calc
+  if (
+    startTime !== 12 &&
+    earlier(startTime, 12) === 12 &&
+    earlier(endTime, 12) === 12
+  ) {
+    return (endTime - startTime) * midnightToEndRate;
+  }
+
+  // start at midnight and end after midnight, bedtime is not relevant in calc
+  if (earlier(startTime, 12) === 12 && earlier(endTime, 12) === 12) {
+    return endTime * midnightToEndRate;
+  }
+
+  // start before midnight and end after midnight
   return (
     timeFromStartToBed * startToBedRate +
     timeFromBedToMidnight * bedToMidnightRate +

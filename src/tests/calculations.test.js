@@ -137,16 +137,53 @@ describe('calculations', () => {
     });
 
     describe('various start, bed, and end times', () => {
-      it('should return 8 dollars when start time is 5 PM bed time is 5 PM and end time is 6 PM', () => {
+      it('should return 84 dollars when start time is 7 PM bed time is 10 PM and end time is 2 AM', () => {
+        const times = { startTime: '7 PM', bedTime: '10 PM', endTime: '2 AM' };
+        // ((10 - 7) * 12) + ((12 - 10) * 8) + (2 * 16) = 84
+        assert.equal(getBabysittingCharge(times), 84);
+      });
+
+      it('should handle times where both start and end are before midnight and child has bedtime at start of shift', () => {
         const times = { startTime: '5 PM', bedTime: '5 PM', endTime: '6 PM' };
         // (6 - 5) * 8
         assert.equal(getBabysittingCharge(times), 8);
       });
 
-      it('should return 84 dollars when start time is 7 PM bed time is 10 PM and end time is 2 AM', () => {
-        const times = { startTime: '7 PM', bedTime: '10 PM', endTime: '2 AM' };
-        // ((10 - 7) * 12) + ((12 - 10) * 8) + (2 * 16) = 84
-        assert.equal(getBabysittingCharge(times), 84);
+      it('should handle times where start is before midnight, end at midnight and child already asleep', () => {
+        const times = { startTime: '8 PM', bedTime: '5 PM', endTime: '12 AM' };
+        // (12 - 8) * 8
+        assert.equal(getBabysittingCharge(times), 32);
+      });
+
+      it('should handle times where start is before midnight, end at midnight and bedtime in between', () => {
+        const times = { startTime: '6 PM', bedTime: '8 PM', endTime: '12 AM' };
+        // (8 - 6) * 12 + (12 - 8) * 8
+        assert.equal(getBabysittingCharge(times), 56);
+      });
+
+      it('should handle times where both start and end are before midnight and child has bedtime during shift', () => {
+        const times = { startTime: '5 PM', bedTime: '6 PM', endTime: '9 PM' };
+        // (6 - 5) * 12 + (9 - 6) * 8
+        assert.equal(getBabysittingCharge(times), 36);
+      });
+
+      it('should handle times where both start and end are before midnight and child has bedtime after shift', () => {
+        const times = { startTime: '5 PM', bedTime: '11 PM', endTime: '10 PM' };
+        // (10 - 5) * 12
+        assert.equal(getBabysittingCharge(times), 60);
+      });
+
+      it('should handle times where both start and end are after midnight', () => {
+        const times = { startTime: '1 AM', bedTime: '8 PM', endTime: '3 AM' };
+        // bedtime is irrelevant in any case where these are after midnight
+        // (3 - 1) * 16
+        assert.equal(getBabysittingCharge(times), 32);
+      });
+
+      it('should handle times where start is midnight and end is after midnight', () => {
+        const times = { startTime: '12 AM', bedTime: '4 AM', endTime: '4 AM' };
+        // (4) * 16
+        assert.equal(getBabysittingCharge(times), 64);
       });
 
       it('should return 24 dollars when start time is 9 PM bed time is 6 PM and end time is 12 AM', () => {

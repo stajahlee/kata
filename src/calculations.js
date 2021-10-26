@@ -58,6 +58,20 @@ const getBabysittingCharge = (
     );
   }
 
+  // start before midnight, but bed and end after midnight
+  if (startTime === earlier(startTime, 12) && endTime === 12) {
+    return (12 - startTime) * startToBedRate;
+  }
+
+  // start before midnight, but bed and end after midnight
+  if (
+    startTime === earlier(startTime, 12) &&
+    earlier(endTime, 12) === 12 &&
+    earlier(bedTime, 12) === 12
+  ) {
+    return (12 - startTime) * startToBedRate + endTime * midnightToEndRate;
+  }
+
   // start and end before midnight, with bed after ending
   if (
     startTime === earlier(startTime, 12) &&

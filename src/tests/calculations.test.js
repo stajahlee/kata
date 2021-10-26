@@ -1,7 +1,29 @@
 const { assert } = require('chai');
-const { getBabysittingCharge } = require('../calculations');
+const { getBabysittingCharge, earlier } = require('../calculations');
 
 describe('calculations', () => {
+  describe('#earlier', () => {
+    it('should return the earlier time between 9 (9 PM) and 1 (1 AM) to be 9', () => {
+      const earlierTime = earlier(9, 1);
+      assert.equal(earlierTime, 9);
+    });
+
+    it('should return the earlier time between 2 (2 AM) and 1 (1 AM) to be 1', () => {
+      const earlierTime = earlier(1, 2);
+      assert.equal(earlierTime, 1);
+    });
+
+    it('should return the earlier time between 12 (12 AM) and 12 (12 AM) to be 12', () => {
+      const earlierTime = earlier(12, 12);
+      assert.equal(earlierTime, 12);
+    });
+
+    it('should return the earlier time between 11 (11 PM) and 6 (6 PM) to be 6', () => {
+      const earlierTime = earlier(11, 6);
+      assert.equal(earlierTime, 6);
+    });
+  });
+
   describe('#getBabysittingCharge', () => {
     it('should return a number that represents full dollar amount with only default arguments', () => {
       const charge = getBabysittingCharge();

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha './**/*.test.js'",
     "test:watch": "mocha --watch './**/*.test.js'",
-    "get-rate": "node index.js"
+    "get-charge": "node index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

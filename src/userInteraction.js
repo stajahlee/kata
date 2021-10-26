@@ -35,6 +35,11 @@ const questions = [
   },
 ];
 
+/**
+ * using a command line tool for user input get a Promise that resolves to the selections
+ * @param {*} _inquirer
+ * @returns a Promise that resolves to the selections made by the user
+ */
 const getUserInput = async (_inquirer = inquirer) =>
   _inquirer.prompt(questions).then((r) => r);
 

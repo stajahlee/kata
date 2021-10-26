@@ -149,19 +149,19 @@ describe('calculations', () => {
         assert.equal(getBabysittingCharge(times), 8);
       });
 
-      it.only('should handle times where start is before midnight, but bedtime and end are both after midnight', () => {
+      it('should handle times where start is before midnight, but bedtime and end are both after midnight', () => {
         const times = { startTime: '5 PM', bedTime: '2 AM', endTime: '4 AM' };
         // ((12 - 5) * 12) + (4 * 16) = 148
         assert.equal(getBabysittingCharge(times), 148);
       });
 
-      it.only('should handle times where start is before midnight, but bedtime and end are both at midnight', () => {
+      it('should handle times where start is before midnight, but bedtime and end are both at midnight', () => {
         const times = { startTime: '5 PM', bedTime: '12 AM', endTime: '12 AM' };
         // ((12 - 5) * 12)
         assert.equal(getBabysittingCharge(times), 84);
       });
 
-      it.only('should handle times where start is before midnight, bedtime between, and end at midnight', () => {
+      it('should handle times where start is before midnight, bedtime between, and end at midnight', () => {
         const times = { startTime: '5 PM', bedTime: '9 PM', endTime: '12 AM' };
         // (9 - 5) * 12 + (12 - 9) * 8
         assert.equal(getBabysittingCharge(times), 72);

@@ -17,6 +17,7 @@ const main = async () => {
   process.stdout.write(
     `\nThis night's babysitting charge should be:\n\n$${nightlyCharge}.00\n\n`
   );
+  return nightlyCharge;
 };
 
 main();

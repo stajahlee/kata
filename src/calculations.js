@@ -19,8 +19,8 @@ const enumerateTimes = (times) => {
  * @returns earlier time (where 5 - 11 are PM, 12 is AM, 1 - 4 are AM, so 11 is earlier than 3 in this case even though it is a larger int.)
  */
 const earlier = (time1, time2) => {
-  if (time2 <= 4 && !time1 <= 4) return time1;
-  if (time1 <= 4 && !time2 <= 4) return time2;
+  if (time2 <= 4 && !(time1 <= 4)) return time1;
+  if (time1 <= 4 && !(time2 <= 4)) return time2;
   return Math.min(time1, time2);
 };
 
